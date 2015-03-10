@@ -2,6 +2,7 @@ package com.quest.game.fragments;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 
 import com.quest.game.Constants;
 import com.quest.game.R;
+import com.quest.game.activities.FinishActivity;
 import com.quest.game.interfaces.IFragment;
 
 /**
@@ -118,6 +120,9 @@ public class FragmentFifteenStep extends Fragment{
                      + letterFour.getText() + letterFive.getText();
                 if (resultText.equals("OFICE")) {
                     iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=FINISH");
+                    getActivity().finish();
+                    Intent intent = new Intent(getActivity(), FinishActivity.class);
+                    getActivity().startActivity(intent);
                 }
             }
         });

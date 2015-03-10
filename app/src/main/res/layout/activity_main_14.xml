@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent"
+  xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:orientation="vertical" android:background="@drawable/left_border" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="8.5" />
+    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.3">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                    <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="4.3">
+                        <ImageButton android:id="@+id/ImageButton09" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                        <ImageButton android:id="@+id/ImageButton08" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"  />
+                        <ImageButton android:id="@+id/ImageButton07" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"  />
+                        <ImageButton android:id="@+id/ImageButton06" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                        <ImageButton android:id="@+id/ImageButton05" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                    </LinearLayout>
+                    <RelativeLayout android:orientation="horizontal" android:background="@drawable/screen_8" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0">
+                        <TextView android:id="@+id/textView1" android:visibility="gone" android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="14 - 16" android:layout_alignParentTop="true" android:layout_alignParentRight="true" />
+                    </RelativeLayout>
+                </LinearLayout>
+                <LinearLayout android:orientation="vertical" android:background="@drawable/charge_3" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="4.5">
+                    <LinearLayout android:orientation="vertical" android:visibility="visible" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="40.0dip" android:layout_marginRight="35.0dip" android:layout_marginBottom="50.0dip" android:layout_weight="1.0">
+                        <ImageView android:id="@+id/ImageView17" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/ImageView16" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/ImageView15" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/ImageView14" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_1" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_3" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_4" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_5" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_6" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_7" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_8" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_9" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_10" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_11" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_12" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_13" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_off" android:layout_weight="1.0" />
+                        <ImageView android:id="@+id/charge_14" android:layout_width="fill_parent" android:layout_height="fill_parent" android:src="@drawable/red_on" android:layout_weight="1.0" />
+                    </LinearLayout>
+                </LinearLayout>
+            </LinearLayout>
+            <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="6.3">
+                <ImageButton android:id="@+id/ImageButton10" android:background="@drawable/up_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"/>
+                <ImageButton android:id="@+id/ImageButton04" android:background="@drawable/up_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"/>
+                <ImageButton android:id="@+id/ImageButton03" android:background="@drawable/up_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"/>
+                <ImageButton android:id="@+id/ImageButton02" android:background="@drawable/up_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"/>
+                <ImageButton android:id="@+id/ImageButton01" android:background="@drawable/up_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0"/>
+            </LinearLayout>
+        </LinearLayout>
+        <LinearLayout android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="8.0">
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="2.0">
+                <ImageButton android:background="@drawable/right_button_off_newl" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+                <ImageButton android:id="@+id/ImageButtonSelector" android:background="@drawable/selector" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="12" />
+                <ImageButton android:background="@drawable/right_button_off_newr" android:layout_width="wrap_content" android:layout_height="wrap_content" android:layout_weight="1.0" />
+            </LinearLayout>
+            <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="3.0" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

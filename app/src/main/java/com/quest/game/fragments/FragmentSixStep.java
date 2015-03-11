@@ -33,7 +33,7 @@ public class FragmentSixStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_4, null);
-       // iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
+        iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
         iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S6");
         iFragment.getStatus(new FragmentSevenStep(), "S7");

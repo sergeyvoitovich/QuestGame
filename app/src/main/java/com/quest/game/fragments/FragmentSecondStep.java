@@ -23,7 +23,7 @@ import org.w3c.dom.Text;
 /**
  * Created by VoitovichSergei on 07.03.2015.
  */
-public class FragmentSecondStep extends Fragment implements TimerListener{
+public class FragmentSecondStep extends Fragment{
     private View view;
     private boolean comboButtonOne = false;
     private boolean comboButtonTwo = false;
@@ -41,7 +41,7 @@ public class FragmentSecondStep extends Fragment implements TimerListener{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_2, null);
         initButtons();
-        iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view, this);
+        iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S2");
         iFragment.getStatus(new FragmentThirdStep(), "S3");
         return view;
@@ -97,13 +97,5 @@ public class FragmentSecondStep extends Fragment implements TimerListener{
     public void onDestroy() {
         super.onDestroy();
         iFragment = null;
-    }
-
-    @Override
-    public void onTimerFinish() {
-        Animation animation = new AlphaAnimation(1,0);
-        animation.setDuration(2000);
-        view.setAnimation(animation);
-        animation.start();
     }
 }

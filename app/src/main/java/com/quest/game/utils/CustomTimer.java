@@ -18,6 +18,7 @@ public class CustomTimer{
 
     private Runnable mTicker;
     private Handler mHandler;
+    private boolean firstStart = false;
 
     private boolean mTickerStopped = true;
 
@@ -40,6 +41,7 @@ public class CustomTimer{
     }
 
     public void startTimer(){
+        firstStart = true;
         if (!isRunning()) {
             mTickerStopped = false;
             mTicker.run();
@@ -86,6 +88,10 @@ public class CustomTimer{
 
     public void setTime(long seconds){
         this.seconds = seconds;
+    }
+
+    public boolean getFirstStart() {
+        return firstStart;
     }
 
 }

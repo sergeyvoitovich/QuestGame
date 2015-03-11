@@ -31,11 +31,13 @@ import org.xml.sax.InputSource;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.Timer;
+import java.util.TimerTask;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
-public class MainActivity extends Activity implements IFragment{
+public class MainActivity extends Activity implements IFragment,TimerListener{
     private Fragment nextFragment;
     private FragmentManager myFragmentManager;
     private Fragment fragmentFirstStep;
@@ -60,7 +62,8 @@ public class MainActivity extends Activity implements IFragment{
         getWindow().getDecorView().setSystemUiVisibility(5894);
         setZeroCountCombo();
 
-        customTimer = new CustomTimer();
+        customTimer = new CustomTimer(this);
+        customTimer.setTime(0);
 
         initFragments();
 
@@ -72,7 +75,21 @@ public class MainActivity extends Activity implements IFragment{
         }
     }
 
+    @Override
+    protected void onPause() {
+        super.onPause();
+        if (customTimer != null) {
+            customTimer.stopTimer();
+        }
+    }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (customTimer != null && customTimer.getFirstStart()) {
+            customTimer.startTimer();
+        }
+    }
 
     private void initFragments() {
         myFragmentManager = getFragmentManager();
@@ -106,6 +123,38 @@ public class MainActivity extends Activity implements IFragment{
     @Override
     public void finishActivity() {
         finish();
+    }
+
+    @Override
+    public void onTimerFinish() {
+        Animation animation = new AlphaAnimation(1,0);
+        animation.setDuration(1000*15);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                currentView.setVisibility(View.GONE);
+                TimerTask timerTask = new TimerTask() {
+
+                    @Override
+                    public void run() {
+                      finish();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 1000*60*3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        currentView.startAnimation(animation);
     }
 
 
@@ -196,15 +245,15 @@ public class MainActivity extends Activity implements IFragment{
     }
 
     @Override
-    public void changeTimer(TextView textView, View view, TimerListener timerListener) {
+    public void changeTimer(TextView textView, View view) {
+        this.currentView = view;
         customTimer.setTextView(textView);
-        customTimer.setTimerListener(timerListener);
         customTimer.startTimer();
     }
 
     @Override
     public void resetTimer() {
-        customTimer.setTime(2);
+        customTimer.setTime(1*60);
     }
 
     @Override

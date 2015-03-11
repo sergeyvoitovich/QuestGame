@@ -41,7 +41,7 @@ public class FragmentEightStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_8, null);
-       //iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
+       iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initImages();
         initButtons();
 

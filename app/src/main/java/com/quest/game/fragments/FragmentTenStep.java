@@ -41,7 +41,7 @@ public class FragmentTenStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_10, null);
-       // iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
+        iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
         initImages();
 

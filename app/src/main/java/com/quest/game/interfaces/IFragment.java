@@ -15,7 +15,7 @@ public interface IFragment {
     public int getCountCombo();
     public void setCountCombo();
     public void setZeroCountCombo();
-    public void changeTimer(TextView textView, View view, TimerListener timerListener);
+    public void changeTimer(TextView textView, View view);
     public void resetTimer();
     public void stopTimer();
 }

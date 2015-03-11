@@ -45,7 +45,7 @@ public class FragmentThirdStep extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_3, null);
 
-       // iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
+        iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
         initTexts();
         return view;

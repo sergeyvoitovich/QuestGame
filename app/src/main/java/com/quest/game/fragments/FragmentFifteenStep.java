@@ -13,7 +13,6 @@ import android.widget.TextView;
 
 import com.quest.game.Constants;
 import com.quest.game.R;
-import com.quest.game.activities.FinishActivity;
 import com.quest.game.interfaces.IFragment;
 
 /**
@@ -120,9 +119,8 @@ public class FragmentFifteenStep extends Fragment{
                      + letterFour.getText() + letterFive.getText();
                 if (resultText.equals("OFICE")) {
                     iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=FINISH");
-                    getActivity().finish();
-                    Intent intent = new Intent(getActivity(), FinishActivity.class);
-                    getActivity().startActivity(intent);
+                    iFragment.stopTimer();
+                    iFragment.nextFragment(new FragmentFirstStep());
                 }
             }
         });

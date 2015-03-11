@@ -13,7 +13,16 @@
                         <ImageButton android:id="@+id/ImageButton06" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
                         <ImageButton android:id="@+id/ImageButton05" android:background="@drawable/down_button" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
                     </LinearLayout>
-                    <RelativeLayout android:orientation="horizontal" android:background="@drawable/screen_2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                    <RelativeLayout android:orientation="horizontal" android:background="@drawable/screen_2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" >
+                        <LinearLayout android:orientation="horizontal" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" android:layout_alignParentLeft="true" android:layout_alignParentBottom="true" />
+                        <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent">
+                            <LinearLayout android:gravity="center" android:orientation="vertical" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="3.0">
+                                <com.quest.game.view.VerticalTextView android:textSize="18.0dip" android:typeface="normal" android:textStyle="italic|bold" android:textColor="#ffaab262" android:paddingRight="10dp" android:gravity="right" android:layout_width="fill_parent" android:layout_height="fill_parent" android:text="до полной разрядки" android:layout_weight="1.0" />
+                                <com.quest.game.view.VerticalTextView android:textSize="18.0dip" android:typeface="normal" android:textStyle="italic|bold" android:textColor="#ffaab262" android:paddingLeft="10dp" android:gravity="left" android:id="@+id/timer" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.25" />
+                            </LinearLayout>
+                            <LinearLayout android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="1.0" />
+                        </LinearLayout>
+                    </RelativeLayout>
                 </LinearLayout>
                 <LinearLayout android:orientation="vertical" android:background="@drawable/charge_2" android:layout_width="fill_parent" android:layout_height="fill_parent" android:layout_weight="4.5">
                     <LinearLayout android:orientation="vertical" android:visibility="gone" android:layout_width="fill_parent" android:layout_height="wrap_content" android:layout_marginLeft="20.0dip" android:layout_marginTop="40.0dip" android:layout_marginRight="35.0dip" android:layout_marginBottom="50.0dip" android:layout_weight="1.0">

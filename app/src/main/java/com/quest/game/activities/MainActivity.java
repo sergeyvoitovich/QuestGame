@@ -10,11 +10,16 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
+import android.view.animation.AlphaAnimation;
+import android.view.animation.Animation;
 import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.quest.game.R;
 import com.quest.game.fragments.FragmentFirstStep;
 import com.quest.game.interfaces.IFragment;
+import com.quest.game.interfaces.TimerListener;
+import com.quest.game.utils.CustomTimer;
 
 import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.methods.HttpGet;
@@ -30,12 +35,14 @@ import java.net.URL;
 import javax.xml.parsers.DocumentBuilderFactory;
 
 
-public class MainActivity extends Activity implements IFragment {
+public class MainActivity extends Activity implements IFragment{
     private Fragment nextFragment;
     private FragmentManager myFragmentManager;
     private Fragment fragmentFirstStep;
     private String url, forthcomingStatus;
     private static int comboCount = 0;
+    private CustomTimer customTimer;
+    private View currentView;
 
     public boolean dispatchTouchEvent(MotionEvent paramMotionEvent)
     {
@@ -52,6 +59,8 @@ public class MainActivity extends Activity implements IFragment {
         setContentView(R.layout.main_layout);
         getWindow().getDecorView().setSystemUiVisibility(5894);
         setZeroCountCombo();
+
+        customTimer = new CustomTimer();
 
         initFragments();
 
@@ -98,6 +107,7 @@ public class MainActivity extends Activity implements IFragment {
     public void finishActivity() {
         finish();
     }
+
 
     public class getstatus
             extends AsyncTask<Void, Void, Void>
@@ -183,5 +193,22 @@ public class MainActivity extends Activity implements IFragment {
     @Override
     public void setZeroCountCombo() {
         comboCount = 0;
+    }
+
+    @Override
+    public void changeTimer(TextView textView, View view, TimerListener timerListener) {
+        customTimer.setTextView(textView);
+        customTimer.setTimerListener(timerListener);
+        customTimer.startTimer();
+    }
+
+    @Override
+    public void resetTimer() {
+        customTimer.setTime(2);
+    }
+
+    @Override
+    public void stopTimer() {
+        customTimer.stopTimer();
     }
 }

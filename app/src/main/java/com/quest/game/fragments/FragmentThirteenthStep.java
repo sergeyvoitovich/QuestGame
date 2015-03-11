@@ -10,6 +10,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.quest.game.R;
 import com.quest.game.interfaces.IFragment;
@@ -40,6 +41,7 @@ public class FragmentThirteenthStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_13, null);
+       // iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
         initImages();
 

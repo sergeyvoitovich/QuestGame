@@ -20,7 +20,6 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".activities.FinishActivity" android:screenOrientation="landscape"/>
     </application>
 
 </manifest>

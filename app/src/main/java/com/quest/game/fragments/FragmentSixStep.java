@@ -8,6 +8,7 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.quest.game.R;
 import com.quest.game.interfaces.IFragment;
@@ -32,6 +33,7 @@ public class FragmentSixStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_4, null);
+       // iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
         iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S6");
         iFragment.getStatus(new FragmentSevenStep(), "S7");

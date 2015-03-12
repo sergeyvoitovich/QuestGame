@@ -4,6 +4,9 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
+import android.content.Context;
+import android.content.res.AssetFileDescriptor;
+import android.media.MediaPlayer;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -59,6 +62,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     private View currentView;
     private String currentStatus;
     private boolean startAsynctaskStatus = false;
+    private TimerTask timerTask;
+    private MediaPlayer mediaPlayer;
 
     public boolean dispatchTouchEvent(MotionEvent paramMotionEvent)
     {
@@ -75,10 +80,14 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
         setContentView(R.layout.main_layout);
         getWindow().getDecorView().setSystemUiVisibility(5894);
         setZeroCountCombo();
+        getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S1");
+
+        mediaPlayer = new MediaPlayer();
+        mediaPlayer.stop();
 
         startAsynctaskStatus = true;
         currentStatus = "S1";
-        getStatus();
+        //getStatus();
 
         customTimer = new CustomTimer(this);
         customTimer.setTime(0);
@@ -140,33 +149,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
     @Override
     public void onTimerFinish() {
-        Animation animation = new AlphaAnimation(1,0);
-        animation.setDuration(1000*15);
-        animation.setAnimationListener(new Animation.AnimationListener() {
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                currentView.setVisibility(View.GONE);
-                TimerTask timerTask = new TimerTask() {
-
-                    @Override
-                    public void run() {
-                      finish();
-                    }
-                };
-                Timer timer = new Timer();
-                timer.schedule(timerTask, 1000*60*3);
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-
-            }
-        });
-        currentView.startAnimation(animation);
+        startAsynctaskStatus = false;
+       startAnimation();
     }
 
 
@@ -228,7 +212,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
                 } else if (this.status.equals("S15")) {
                     nextFragment(new FragmentFifteenStep());
                 } else if (this.status.equals("FINISH")) {
-                    nextFragment(new FragmentFirstStep());
+                } else if (this.status.equals("FAIL")) {
+                    startAnimation();
                 }
                 currentStatus = status;
             }
@@ -282,8 +267,13 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     @Override
     public void changeTimer(TextView textView, View view) {
         this.currentView = view;
-        customTimer.setTextView(textView);
-        customTimer.startTimer();
+
+        if (textView!=null) {
+            customTimer.setTextView(textView);
+            customTimer.startTimer();
+        } else {
+            customTimer.stopTimer();
+        }
     }
 
     @Override
@@ -299,6 +289,54 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mediaPlayer.stop();
         startAsynctaskStatus = false;
+    }
+
+    private void startAnimation() {
+        startAsynctaskStatus = false;
+        Animation animation = new AlphaAnimation(Float.valueOf("0.8"), 0);
+        animation.setDuration(1000 * 15);
+        animation.setAnimationListener(new Animation.AnimationListener() {
+            @Override
+            public void onAnimationStart(Animation animation) {
+                prepareMediaPlayer(MainActivity.this);
+                mediaPlayer.start();
+            }
+
+            @Override
+            public void onAnimationEnd(Animation animation) {
+                mediaPlayer.stop();
+                currentView.setVisibility(View.GONE);
+                timerTask = new TimerTask() {
+
+                    @Override
+                    public void run() {
+                        finish();
+                    }
+                };
+                Timer timer = new Timer();
+                timer.schedule(timerTask, 1000 * 60 * 3);
+            }
+
+            @Override
+            public void onAnimationRepeat(Animation animation) {
+
+            }
+        });
+        currentView.startAnimation(animation);
+    }
+    public MediaPlayer prepareMediaPlayer(Context context) {
+        try {
+            mediaPlayer.reset();
+            AssetFileDescriptor descriptor = context.getAssets().openFd("profilactics.mp3");
+            mediaPlayer.setDataSource(descriptor.getFileDescriptor(),
+                    descriptor.getStartOffset(), descriptor.getLength());
+            descriptor.close();
+            mediaPlayer.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return mediaPlayer;
     }
 }

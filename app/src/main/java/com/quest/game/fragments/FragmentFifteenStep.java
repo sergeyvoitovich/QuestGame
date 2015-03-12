@@ -45,6 +45,7 @@ public class FragmentFifteenStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_f, null);
+        iFragment.changeTimer(null,view);
         initButtons();
         initTexts();
 
@@ -120,6 +121,11 @@ public class FragmentFifteenStep extends Fragment{
                 if (resultText.equals("OFICE")) {
                     iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=FINISH");
                     iFragment.stopTimer();
+                    letterOne.setText("A");
+                    letterTwo.setText("A");
+                    letterThree.setText("A");
+                    letterFour.setText("A");
+                    letterFive.setText("A");
                 }
             }
         });

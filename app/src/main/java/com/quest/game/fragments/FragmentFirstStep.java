@@ -47,7 +47,8 @@ public class FragmentFirstStep extends Fragment{
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         view = inflater.inflate(R.layout.activity_main_1, null);
-
+        iFragment.changeTimer(null,view);
+        iFragment.stopTimer();
         initButtons();
         initTexts();
         iFragment.resetTimer();

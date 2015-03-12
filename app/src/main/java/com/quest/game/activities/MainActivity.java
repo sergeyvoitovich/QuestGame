@@ -4,19 +4,32 @@ import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.app.FragmentTransaction;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
-import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.quest.game.R;
+import com.quest.game.fragments.FragmentEightStep;
+import com.quest.game.fragments.FragmentElevenStep;
+import com.quest.game.fragments.FragmentFifteenStep;
 import com.quest.game.fragments.FragmentFirstStep;
+import com.quest.game.fragments.FragmentFiveStep;
+import com.quest.game.fragments.FragmentFourStep;
+import com.quest.game.fragments.FragmentFourteenStep;
+import com.quest.game.fragments.FragmentNineStep;
+import com.quest.game.fragments.FragmentSecondStep;
+import com.quest.game.fragments.FragmentSevenStep;
+import com.quest.game.fragments.FragmentSixStep;
+import com.quest.game.fragments.FragmentTenStep;
+import com.quest.game.fragments.FragmentThirdStep;
+import com.quest.game.fragments.FragmentThirteenthStep;
+import com.quest.game.fragments.FragmentTwelfthStep;
 import com.quest.game.interfaces.IFragment;
 import com.quest.game.interfaces.TimerListener;
 import com.quest.game.utils.CustomTimer;
@@ -38,13 +51,14 @@ import javax.xml.parsers.DocumentBuilderFactory;
 
 
 public class MainActivity extends Activity implements IFragment,TimerListener{
-    private Fragment nextFragment;
     private FragmentManager myFragmentManager;
     private Fragment fragmentFirstStep;
-    private String url, forthcomingStatus;
+    private String url;
     private static int comboCount = 0;
     private CustomTimer customTimer;
     private View currentView;
+    private String currentStatus;
+    private boolean startAsynctaskStatus = false;
 
     public boolean dispatchTouchEvent(MotionEvent paramMotionEvent)
     {
@@ -62,9 +76,12 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
         getWindow().getDecorView().setSystemUiVisibility(5894);
         setZeroCountCombo();
 
+        startAsynctaskStatus = true;
+        currentStatus = "S1";
+        getStatus();
+
         customTimer = new CustomTimer(this);
         customTimer.setTime(0);
-
         initFragments();
 
         if (savedInstanceState == null) {
@@ -94,21 +111,17 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     private void initFragments() {
         myFragmentManager = getFragmentManager();
         fragmentFirstStep = new FragmentFirstStep();
-
-
     }
 
     @Override
-    public void getStatus(Fragment fragment, String forthcomingStatus) {
-        this.nextFragment = fragment;
-        this.forthcomingStatus = forthcomingStatus;
-        new getstatus().execute(new Void[0]);
+    public void getStatus() {
+        new GetStatusAsyncTask().execute();
     }
 
     @Override
     public void getSendUserInfo(String url) {
         this.url = url;
-        new SendUserInfo().execute(new Void[0]);
+        new SendUserInfo().execute();
     }
 
     @Override
@@ -132,7 +145,6 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
         animation.setAnimationListener(new Animation.AnimationListener() {
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
@@ -158,15 +170,11 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     }
 
 
-    public class getstatus
-            extends AsyncTask<Void, Void, Void>
-    {
+    public class GetStatusAsyncTask extends AsyncTask<Void, Void, Void> {
         String status = "";
 
-        protected Void doInBackground(Void... paramVarArgs)
-        {
-            try
-            {
+        protected Void doInBackground(Void... paramVarArgs) {
+            try {
                 URL localURL = new URL("http://beappy.ru/igra/getstatus2.php");
                 Document localDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(localURL.openStream()));
                 localDocument.getDocumentElement().normalize();
@@ -179,9 +187,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
                 }
                 return null;
             }
-            catch (Exception localException)
-            {
-                System.out.println("XML Pasing Exception = " + localException);
+            catch (Exception localException) {
+                Log.d("QuestGameException", Log.getStackTraceString(localException));
             }
             return null;
         }
@@ -189,38 +196,66 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
         protected void onPostExecute(Void paramVoid)
         {
             super.onPostExecute(paramVoid);
-            if (this.status.equals(forthcomingStatus))
-            {
-                nextFragment(nextFragment);
+            if (!this.status.equals(currentStatus)) {
+                if (this.status.equals("S1")) {
+                    nextFragment(new FragmentFirstStep());
+                } else if (this.status.equals("S2")) {
+                    nextFragment(new FragmentSecondStep());
+                } else if (this.status.equals("S3")) {
+                    nextFragment(new FragmentThirdStep());
+                } else if (this.status.equals("S4")) {
+                    nextFragment(new FragmentFourStep());
+                } else if (this.status.equals("S5")) {
+                    nextFragment(new FragmentFiveStep());
+                } else if (this.status.equals("S6")) {
+                    nextFragment(new FragmentSixStep());
+                } else if (this.status.equals("S7")) {
+                    nextFragment(new FragmentSevenStep());
+                } else if (this.status.equals("S8")) {
+                    nextFragment(new FragmentEightStep());
+                } else if (this.status.equals("S9")) {
+                    nextFragment(new FragmentNineStep());
+                } else if (this.status.equals("S10")) {
+                    nextFragment(new FragmentTenStep());
+                } else if (this.status.equals("S11")) {
+                    nextFragment(new FragmentElevenStep());
+                } else if (this.status.equals("S12")) {
+                    nextFragment(new FragmentTwelfthStep());
+                } else if (this.status.equals("S13")) {
+                    nextFragment(new FragmentThirteenthStep());
+                } else if (this.status.equals("S14")) {
+                    nextFragment(new FragmentFourteenStep());
+                } else if (this.status.equals("S15")) {
+                    nextFragment(new FragmentFifteenStep());
+                } else if (this.status.equals("FINISH")) {
+                    nextFragment(new FragmentFirstStep());
+                }
+                currentStatus = status;
+            }
+            if (!startAsynctaskStatus) {
                 return;
             }
-            MainActivity.this.getStatus(nextFragment, forthcomingStatus);
+            MainActivity.this.getStatus();
         }
     }
 
-    public class SendUserInfo extends AsyncTask<Void, Void, Void>
-    {
+    public class SendUserInfo extends AsyncTask<Void, Void, Void> {
         public SendUserInfo() {}
 
-        protected Void doInBackground(Void... paramVarArgs)
-        {
+        protected Void doInBackground(Void... paramVarArgs) {
             DefaultHttpClient localDefaultHttpClient = new DefaultHttpClient();
             HttpGet localHttpGet = new HttpGet(url);
-            try
-            {
+            try {
                 localDefaultHttpClient.execute(localHttpGet);
                 return null;
             }
-            catch (ClientProtocolException localClientProtocolException)
-            {
-                localClientProtocolException.printStackTrace();
+            catch (ClientProtocolException localClientProtocolException) {
+                Log.d("QuestGameException", Log.getStackTraceString(localClientProtocolException));
             }
-            catch (IOException localIOException)
-            {
-               localIOException.printStackTrace();
+            catch (IOException localIOException) {
+                Log.d("QuestGameException", Log.getStackTraceString(localIOException));
             }
             return null;
-
         }
 
         protected void onPostExecute(Void paramVoid)
@@ -253,11 +288,17 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
     @Override
     public void resetTimer() {
-        customTimer.setTime(1*60);
+        customTimer.setTime(3*60);
     }
 
     @Override
     public void stopTimer() {
         customTimer.stopTimer();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        startAsynctaskStatus = false;
     }
 }

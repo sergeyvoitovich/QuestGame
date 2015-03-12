@@ -35,8 +35,6 @@ public class FragmentSixStep extends Fragment{
         view = inflater.inflate(R.layout.activity_main_4, null);
         iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
-        iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S6");
-        iFragment.getStatus(new FragmentSevenStep(), "S7");
         return view;
     }
 

@@ -35,8 +35,6 @@ public class FragmentFourStep extends Fragment{
         view = inflater.inflate(R.layout.activity_main_4, null);
         initButtons();
         iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
-        iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S4");
-        iFragment.getStatus(new FragmentFiveStep(), "S5");
         return view;
     }
 

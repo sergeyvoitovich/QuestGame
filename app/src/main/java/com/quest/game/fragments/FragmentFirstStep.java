@@ -52,6 +52,7 @@ public class FragmentFirstStep extends Fragment{
         initTexts();
         iFragment.resetTimer();
         iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S1");
+        iFragment.getStatus();
         return view;
     }
 
@@ -148,7 +149,7 @@ public class FragmentFirstStep extends Fragment{
                 String resultText = letterOne.getText().toString() + letterTwo.getText() + letterThree.getText()
                         + letterFour.getText() + letterFive.getText();
                 if (resultText.equals("TRAVL")) {
-                    iFragment.nextFragment(new FragmentSecondStep());
+                    iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S2");
                 }
             }
         });

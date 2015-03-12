@@ -104,8 +104,6 @@ public class FragmentEightStep extends Fragment{
             }
         }.start();
 
-        iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S8");
-        iFragment.getStatus(new FragmentNineStep(), "S9");
         return view;
     }
 

@@ -120,7 +120,6 @@ public class FragmentFifteenStep extends Fragment{
                 if (resultText.equals("OFICE")) {
                     iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=FINISH");
                     iFragment.stopTimer();
-                    iFragment.nextFragment(new FragmentFirstStep());
                 }
             }
         });

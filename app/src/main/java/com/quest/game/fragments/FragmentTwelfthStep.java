@@ -84,12 +84,10 @@ public class FragmentTwelfthStep extends Fragment{
             }
         }.start();
 
-        iFragment.getStatus(new FragmentThirteenthStep(), "S13");
         return view;
     }
 
     private void initImages() {
-
         images.add((ImageView) view.findViewById(R.id.charge_9));
         images.add((ImageView) view.findViewById(R.id.charge_10));
         images.add((ImageView) view.findViewById(R.id.charge_11));

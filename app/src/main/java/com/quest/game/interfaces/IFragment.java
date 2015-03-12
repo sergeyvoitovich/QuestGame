@@ -8,7 +8,7 @@ import android.widget.TextView;
  * Created by VoitovichSergei on 07.03.2015.
  */
 public interface IFragment {
-    public void getStatus(Fragment fragment, String forthcomingStatus);
+    public void getStatus();
     public void getSendUserInfo(String url);
     public void nextFragment(Fragment fragment);
     public void finishActivity();

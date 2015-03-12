@@ -118,7 +118,7 @@ public class FragmentThirdStep extends Fragment{
                 String resultText = letterOne.getText().toString() + letterTwo.getText() + letterThree.getText()
                      + letterFour.getText() + letterFive.getText();
                 if (resultText.equals("GAMBL")) {
-                    iFragment.nextFragment(new FragmentFourStep());
+                    iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S4");
                 }
            }
        });

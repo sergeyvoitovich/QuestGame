@@ -47,8 +47,6 @@ public class FragmentSevenStep extends Fragment{
         iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
         initButtons();
         initTexts();
-        iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S7");
-        iFragment.getStatus(new FragmentEightStep(), "S8");
         return view;
     }
 

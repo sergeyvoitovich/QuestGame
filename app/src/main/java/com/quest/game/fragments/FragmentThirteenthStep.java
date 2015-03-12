@@ -78,7 +78,6 @@ public class FragmentThirteenthStep extends Fragment{
             }
         }.start();
 
-        iFragment.getStatus(new FragmentFourteenStep(), "S14");
         return view;
     }
 

@@ -94,7 +94,6 @@ public class FragmentTenStep extends Fragment{
             }
         }.start();
 
-        iFragment.getStatus(new FragmentElevenStep(), "S11");
         return view;
     }
 

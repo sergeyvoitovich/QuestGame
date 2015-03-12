@@ -42,8 +42,6 @@ public class FragmentSecondStep extends Fragment{
         view = inflater.inflate(R.layout.activity_main_2, null);
         initButtons();
         iFragment.changeTimer((TextView)view.findViewById(R.id.timer),view);
-        iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S2");
-        iFragment.getStatus(new FragmentThirdStep(), "S3");
         return view;
     }
 

@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.os.SystemClock;
 import android.widget.TextView;
 
+import com.quest.game.interfaces.IFragment;
 import com.quest.game.interfaces.TimerListener;
 
 import java.text.SimpleDateFormat;
@@ -74,6 +75,10 @@ public class CustomTimer{
                 if (seconds == 0) {
                     if (timerListener != null) timerListener.onTimerFinish();
                     mTickerStopped = true;
+                }
+
+                if (seconds % 10 == 0) {
+                    timerListener.onCurrentTime(sdf.format(new Date(seconds * 1000)));
                 }
 
                 seconds--;

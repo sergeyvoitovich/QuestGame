@@ -5,4 +5,5 @@ package com.quest.game.interfaces;
  */
 public interface TimerListener {
     public void onTimerFinish();
+    public void onCurrentTime(String time);
 }

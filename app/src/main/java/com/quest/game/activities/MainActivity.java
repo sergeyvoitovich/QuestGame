@@ -64,6 +64,9 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     private boolean startAsynctaskStatus = false;
     private TimerTask timerTask;
     private MediaPlayer mediaPlayer;
+    private String currentValueTimer = "";
+    private String currentStatusTimer;
+
 
     public boolean dispatchTouchEvent(MotionEvent paramMotionEvent)
     {
@@ -81,13 +84,14 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
         getWindow().getDecorView().setSystemUiVisibility(5894);
         setZeroCountCombo();
         getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S1");
+        getSendUserInfo("http://medguard.ru/1111/ts.php?st=1");
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.stop();
 
         startAsynctaskStatus = true;
+        currentStatusTimer = "1";
         currentStatus = "S1";
-        //getStatus();
 
         customTimer = new CustomTimer(this);
         customTimer.setTime(0);
@@ -112,7 +116,7 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
     @Override
     protected void onResume() {
         super.onResume();
-        if (customTimer != null && customTimer.getFirstStart()) {
+        if (customTimer != null && customTimer.getFirstStart() && currentStatusTimer.equals("1")) {
             customTimer.startTimer();
         }
     }
@@ -149,8 +153,14 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
     @Override
     public void onTimerFinish() {
-        startAsynctaskStatus = false;
+       startAsynctaskStatus = false;
        startAnimation();
+    }
+
+    @Override
+    public void onCurrentTime(String currentValueTimer) {
+        this.currentValueTimer = currentValueTimer;
+        new TimerStatus().execute();
     }
 
 
@@ -184,7 +194,14 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
                 if (this.status.equals("S1")) {
                     nextFragment(new FragmentFirstStep());
                 } else if (this.status.equals("S2")) {
-                    nextFragment(new FragmentSecondStep());
+                    TimerTask timerSlipS2 = new TimerTask() {
+                        @Override
+                        public void run() {
+                            nextFragment(new FragmentSecondStep());
+                        }
+                    };
+                    Timer timer = new Timer();
+                    timer.schedule(timerSlipS2, 1000 * 19);
                 } else if (this.status.equals("S3")) {
                     nextFragment(new FragmentThirdStep());
                 } else if (this.status.equals("S4")) {
@@ -278,7 +295,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
     @Override
     public void resetTimer() {
-        customTimer.setTime(3*60);
+        customTimer.setTime(60*60);
+
     }
 
     @Override
@@ -338,5 +356,45 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
             e.printStackTrace();
         }
         return mediaPlayer;
+    }
+
+    public class TimerStatus extends AsyncTask<Void, Void, Void> {
+        String timerStatus = "";
+
+        protected Void doInBackground(Void... paramVarArgs) {
+            try {
+                URL localURL = new URL("http://medguard.ru/1111/t1.php");
+                Document localDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(localURL.openStream()));
+                localDocument.getDocumentElement().normalize();
+                NodeList localNodeList1 = localDocument.getElementsByTagName("slide");
+                for (int i = 0; i < localNodeList1.getLength(); i++)
+                {
+                    NodeList localNodeList2 = ((Element)((Element)localNodeList1.item(i)).getElementsByTagName("id").item(0)).getChildNodes();
+                    System.out.println("ID = " + localNodeList2.item(0).getNodeValue());
+                    this.timerStatus = localNodeList2.item(0).getNodeValue();
+                }
+                return null;
+            }
+            catch (Exception localException) {
+                Log.d("QuestGameException", Log.getStackTraceString(localException));
+            }
+            return null;
+        }
+
+        protected void onPostExecute(Void paramVoid) {
+            super.onPostExecute(paramVoid);
+            currentStatusTimer = timerStatus;
+            if (!timerStatus.equals("0")) {
+                customTimer.startTimer();
+                getSendUserInfo("http://medguard.ru/1111/tr.php?tr=" + currentValueTimer);
+            } else {
+                customTimer.stopTimer();
+
+                if (!startAsynctaskStatus) {
+                    return;
+                }
+                new TimerStatus().execute();
+            }
+        }
     }
 }

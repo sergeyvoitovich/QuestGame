@@ -119,7 +119,7 @@ public class FragmentFifteenStep extends Fragment{
                 String resultText = letterOne.getText().toString() + letterTwo.getText() + letterThree.getText()
                      + letterFour.getText() + letterFive.getText();
                 if (resultText.equals("OFICE")) {
-                    iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=FINISH");
+                    iFragment.getSendUserInfo("http://192.168.1.10/rec.php?ekran=FINISH");
                     iFragment.stopTimer();
                     letterOne.setText("A");
                     letterTwo.setText("A");

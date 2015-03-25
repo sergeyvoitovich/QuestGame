@@ -18,6 +18,7 @@ import android.view.animation.Animation;
 import android.widget.TextView;
 
 import com.quest.game.R;
+import com.quest.game.fragments.FragmentBlackStep;
 import com.quest.game.fragments.FragmentEightStep;
 import com.quest.game.fragments.FragmentElevenStep;
 import com.quest.game.fragments.FragmentFifteenStep;
@@ -83,8 +84,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
         setContentView(R.layout.main_layout);
         getWindow().getDecorView().setSystemUiVisibility(5894);
         setZeroCountCombo();
-        getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S1");
-        getSendUserInfo("http://medguard.ru/1111/ts.php?st=1");
+        getSendUserInfo("http://192.168.1.10/rec.php?ekran=S1");
+        getSendUserInfo("http://192.168.1.10/ts.php?st=1");
 
         mediaPlayer = new MediaPlayer();
         mediaPlayer.stop();
@@ -169,7 +170,7 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
         protected Void doInBackground(Void... paramVarArgs) {
             try {
-                URL localURL = new URL("http://beappy.ru/igra/getstatus2.php");
+                URL localURL = new URL("http://192.168.1.10/getstatus2.php");
                 Document localDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(localURL.openStream()));
                 localDocument.getDocumentElement().normalize();
                 NodeList localNodeList1 = localDocument.getElementsByTagName("slide");
@@ -197,7 +198,7 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
                     TimerTask timerSlipS2 = new TimerTask() {
                         @Override
                         public void run() {
-                            nextFragment(new FragmentSecondStep());
+                            nextFragment(new FragmentBlackStep());
                         }
                     };
                     Timer timer = new Timer();
@@ -363,7 +364,7 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
         protected Void doInBackground(Void... paramVarArgs) {
             try {
-                URL localURL = new URL("http://medguard.ru/1111/t1.php");
+                URL localURL = new URL("http://192.168.1.10/t1.php");
                 Document localDocument = DocumentBuilderFactory.newInstance().newDocumentBuilder().parse(new InputSource(localURL.openStream()));
                 localDocument.getDocumentElement().normalize();
                 NodeList localNodeList1 = localDocument.getElementsByTagName("slide");
@@ -386,7 +387,7 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
             currentStatusTimer = timerStatus;
             if (!timerStatus.equals("0")) {
                 customTimer.startTimer();
-                getSendUserInfo("http://medguard.ru/1111/tr.php?tr=" + currentValueTimer);
+                getSendUserInfo("http://192.168.1.10/tr.php?tr=" + currentValueTimer);
             } else {
                 customTimer.stopTimer();
 

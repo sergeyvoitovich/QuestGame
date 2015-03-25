@@ -117,7 +117,7 @@ public class FragmentFiveStep extends Fragment{
                 String resultText = letterOne.getText().toString() + letterTwo.getText() + letterThree.getText()
                      + letterFour.getText() + letterFive.getText();
                 if (resultText.equals("ARTON")) {
-                    iFragment.getSendUserInfo("http://beappy.ru/igra/rec.php?ekran=S6");
+                    iFragment.getSendUserInfo("http://192.168.1.10/rec.php?ekran=S6");
                 }
            }
        });

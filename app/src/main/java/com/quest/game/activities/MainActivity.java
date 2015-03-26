@@ -314,6 +314,7 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
 
     private void startAnimation() {
         startAsynctaskStatus = false;
+        customTimer.stopTimer();
         Animation animation = new AlphaAnimation(Float.valueOf("0.8"), 0);
         animation.setDuration(1000 * 15);
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -321,6 +322,8 @@ public class MainActivity extends Activity implements IFragment,TimerListener{
             public void onAnimationStart(Animation animation) {
                 prepareMediaPlayer(MainActivity.this);
                 mediaPlayer.start();
+               // getSendUserInfo("http://medguard.ru/1111/ts.php?st=0");
+                getSendUserInfo("http://192.168.1.10/tr.php?tr=00:00");
             }
 
             @Override

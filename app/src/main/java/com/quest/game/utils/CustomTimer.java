@@ -77,7 +77,7 @@ public class CustomTimer{
                     mTickerStopped = true;
                 }
 
-                if (seconds % 10 == 0) {
+                if (seconds != 0 && seconds % 10 == 0) {
                     timerListener.onCurrentTime(sdf.format(new Date(seconds * 1000)));
                 }
 
